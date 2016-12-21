@@ -22,3 +22,6 @@ _apigen.phar
 .composer/
 .bash_history
 SaaS/*
+src/protected/application/themes/teatros
+src/protected/application/themes/culturaenlinea
+src/protected/application/plugins/MultipleLocalAuth
