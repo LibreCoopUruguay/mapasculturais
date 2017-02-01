@@ -197,6 +197,6 @@ $editEntity = $this->controller->action === 'create' || $this->controller->actio
     <!-- Link List END -->
 
     <!-- History BEGIN -->
-        <?php $this->part('history.php', array('entity' => $entity)); ?>
+        <?php //$this->part('history.php', array('entity' => $entity)); ?>
     <!-- History END -->
 </div>
