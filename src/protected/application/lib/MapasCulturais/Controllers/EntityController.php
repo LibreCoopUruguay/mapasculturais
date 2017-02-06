@@ -629,4 +629,15 @@ abstract class EntityController extends \MapasCulturais\Controller{
             }
         }
     }
+    
+    
+    public function GET_related() {
+        $app = App::i();
+
+        $entity = $this->requestedEntity;
+        
+        
+        $app->render('generic/related-agents', ['entity' => $entity]);
+        
+    }
 }

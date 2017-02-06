@@ -459,6 +459,10 @@ abstract class Entity implements \JsonSerializable{
     public function getDeleteUrl(){
         return App::i()->createUrl($this->controllerId, 'delete', [$this->id]);
     }
+    
+    public function getRelatedAgentsUrl(){
+        return App::i()->createUrl($this->controllerId, 'related', [$this->id]);
+    }
 
     /**
      * Returns the controller with the same name in the parent namespace if it exists.

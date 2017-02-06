@@ -10,6 +10,7 @@ $this->addRelatedAgentsToJs($entity);
             <input type="text" ng-model="data.newGroupName" placeholder="<?php \MapasCulturais\i::esc_attr_e("Nome do grupo de agentes");?>"/>
         </edit-box>
         <a class="btn btn-default add hltip" title="<?php \MapasCulturais\i::esc_attr_e("Grupos de agentes podem ser usados para exibir membros de um coletivo, equipes técnicas, etc.");?>" ng-click="editbox.open('new-related-agent-group', $event)"><?php \MapasCulturais\i::_e("Adicionar agentes");?></a>
+        <a class="btn btn-default add hltip" title="<?php \MapasCulturais\i::esc_attr_e("Grupos de agentes podem ser usados para exibir membros de um coletivo, equipes técnicas, etc.");?>" href="<?php echo $entity->getRelatedAgentsUrl();?>"><?php \MapasCulturais\i::_e("Agentes relacionados");?></a>
     </div>
     <div class="widget" ng-repeat="group in groups">
         <h3>{{group.name}}</h3>
