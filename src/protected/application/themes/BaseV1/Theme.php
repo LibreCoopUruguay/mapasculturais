@@ -1456,8 +1456,9 @@ class Theme extends MapasCulturais\Theme {
         ]);
 
         $this->enqueueScript('app', 'entity.module.relatedSeals', 'js/ng.entity.module.relatedSeals.js', array('ng-mapasculturais'));
-        $this->localizeScript('relatedSeals', [
-            'requestSent' =>  i::__('Sua requisição para relacionar o selo {{seal}} foi enviada.'),
+        $this->localizeScript('relatedAgents', [
+            'requestSent' =>  i::__('Sua requisição para relacionar o agente {{agent}} foi enviada.'),
+            'confirmDeleteGroup' =>  i::__('Tem certeza que deseja remover o grupo %s? A relação com todos os agentes dentro deste grupo será removida.'),
         ]);
 
         $this->enqueueScript('app', 'entity.directive.editableMultiselect', 'js/ng.entity.directive.editableMultiselect.js', array('ng-mapasculturais'));
@@ -1921,8 +1922,9 @@ class Theme extends MapasCulturais\Theme {
         if($entity->canUser('@control')){
             $this->jsObject['entity']['registrations'] = $entity->allRegistrations ? $entity->allRegistrations : array();
         } else {
-        $this->jsObject['entity']['registrations'] = $entity->sentRegistrations ? $entity->sentRegistrations : array();
+            $this->jsObject['entity']['registrations'] = $entity->sentRegistrations ? $entity->sentRegistrations : array();
         }
+        
         $this->jsObject['entity']['registrationRulesFile'] = $entity->getFile('rules');
         $this->jsObject['entity']['canUserModifyRegistrationFields'] = $entity->canUser('modifyRegistrationFields');
         $this->jsObject['projectRegistrationsEnabled'] = App::i()->config['app.enableProjectRegistration'];
