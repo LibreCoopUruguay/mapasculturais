@@ -141,6 +141,13 @@ class Theme extends MapasCulturais\Theme {
                 'text' => i::__('MC'),
                 'required' => true
             ],
+            'home: logo institute url' => [
+                'name' => i::__('Url da página da instituição responsável pelo site'),
+                'description' => i::__('usado principalmente na home para criar um link à página da instituição responsável pelo site'),
+                'examples' => [i::__($app->getBaseUrl())],
+                'text' => i::__($app->getBaseUrl()),
+                'required' => true
+            ],
             'home: colabore' => [
                 'name' => i::__('texto do botão colabore'),
                 'description' => i::__('texto do botão que chama o usuário para colaborar com o mapeamento'),
@@ -1445,6 +1452,7 @@ class Theme extends MapasCulturais\Theme {
             'needResponsible' =>  i::__('Para se inscrever neste projeto você deve selecionar um agente responsável.'),
             'correctErrors' =>  i::__('Corrija os erros indicados abaixo.'),
             'registrationSent' =>  i::__('Inscrição enviada. Aguarde tela de sumário.'),
+           'Todas opções' => i::__('Todas opções'),
         ]);
 
         $this->enqueueScript('app', 'entity.module.subsiteAdmins', 'js/ng.entity.module.subsiteAdmins.js', array('ng-mapasculturais'));
