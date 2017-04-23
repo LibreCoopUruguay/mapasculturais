@@ -142,6 +142,6 @@ $this->entity = $entity;
     <?php $this->part('link-list', ['entity' => $entity]); ?>
 
     <!-- History BEGIN -->
-        <?php $this->part('history.php', array('entity' => $entity)); ?>
+        <?php //$this->part('history.php', array('entity' => $entity)); ?>
     <!-- History END -->
 </div>
