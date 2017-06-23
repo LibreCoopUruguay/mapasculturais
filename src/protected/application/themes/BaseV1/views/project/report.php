@@ -39,6 +39,7 @@ $_properties = $app->config['registration.propertiesToExport'];
     <thead>
         <tr>
             <th><?php \MapasCulturais\i::_e("Número");?></th>
+            <th><?php \MapasCulturais\i::_e("Link");?></th>
             <th><?php \MapasCulturais\i::_e("Status");?></th>
             <?php if($entity->registrationCategories):?>
                 <th><?php echo $entity->registrationCategTitle ?></th>
@@ -48,11 +49,11 @@ $_properties = $app->config['registration.propertiesToExport'];
                 <th><?php echo $field->title; ?></th>
             <?php endforeach; ?>
             
-            <th>Arquivos</th>
+            <th><?php \MapasCulturais\i::_e("Arquivos");?></th>
             <?php foreach($entity->getUsedAgentRelations() as $def): ?>
                 <th><?php echo $def->label; ?></th>
                 
-                <th><?php echo $def->label; ?> - Área de Atuação</th>
+                <th><?php echo $def->label; ?> <?php \MapasCulturais\i::_e("- Área de Atuação");?></th>
                 
                 <?php foreach($_properties as $prop): if($prop === 'name') continue; ?>
                     <th><?php echo $def->label; ?> - <?php echo Agent::getPropertyLabel($prop); ?></th>
@@ -63,7 +64,8 @@ $_properties = $app->config['registration.propertiesToExport'];
     <tbody>
         <?php foreach($entity->sentRegistrations as $r): ?>
             <tr>
-                <td><a href="<?php echo $r->singleUrl; ?>" target="_blank"><?php echo $r->number; ?></a></td>
+                <td><?php echo $r->number; ?></td>
+                <td><?php echo $r->singleUrl; ?></td>
                 <td><?php echo echoStatus($r); ?></td>
 
                 <?php if($entity->registrationCategories):?>
