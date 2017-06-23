@@ -338,6 +338,8 @@ $unicode-twitter:               "\e094" !default;
 $unicode-facebook:              "\e093" !default;
 // used on .icon-googleplus on _icons.scss file
 $unicode-googleplus:            "\e096" !default;
+// used on .icon-instagram on _icons.scss file
+$unicode-instagram:             "\e09a" !default;
 
 //== Components
 //
@@ -356,6 +358,7 @@ $caret-width-base:          8px !default;
 
 //** Border styles to create dividing rows.
 $thin-row: 1px solid $gray-lighter !default;
+$thick-row: 5px solid $gray-lighter !default;
 
 //== Tables
 //

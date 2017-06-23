@@ -177,7 +177,7 @@ class Theme extends MapasCulturais\Theme {
             'home: home_devs' => [
                 'name' => i::__('texto da seção "desenvolvedores" da home'),
                 'description' => i::__(''),
-                'text' => i::__('Existem algumas maneiras de desenvolvedores interagirem com o Mapas Culturais. A primeira é através da nossa <a href="https://github.com/hacklabr/mapasculturais/blob/master/doc/api.md" target="_blank">API</a>. Com ela você pode acessar os dados públicos no nosso banco de dados e utilizá-los para desenvolver aplicações externas. Além disso, o Mapas Culturais é construído a partir do sofware livre <a href="http://institutotim.org.br/project/mapas-culturais/" target="_blank">Mapas Culturais</a>, criado em parceria com o <a href="http://institutotim.org.br" target="_blank">Instituto TIM</a>, e você pode contribuir para o seu desenvolvimento através do <a href="https://github.com/hacklabr/mapasculturais/" target="_blank">GitHub</a>.')
+                'text' => i::__('Existem algumas maneiras de desenvolvedores interagirem com o Mapas Culturais. A primeira é através da nossa <a href="https://github.com/hacklabr/mapasculturais/blob/master/documentation/docs/mc_config_api.md" target="_blank">API</a>. Com ela você pode acessar os dados públicos no nosso banco de dados e utilizá-los para desenvolver aplicações externas. Além disso, o Mapas Culturais é construído a partir do sofware livre <a href="http://institutotim.org.br/project/mapas-culturais/" target="_blank">Mapas Culturais</a>, criado em parceria com o <a href="http://institutotim.org.br" target="_blank">Instituto TIM</a>, e você pode contribuir para o seu desenvolvimento através do <a href="https://github.com/hacklabr/mapasculturais/" target="_blank">GitHub</a>.')
             ],
 
             // TEXTOS UTILIZADOS NA PÁGINA DE BUSCA, MAPA
@@ -1211,6 +1211,10 @@ class Theme extends MapasCulturais\Theme {
         // It Javis ColorPicker
         $this->enqueueScript('vendor', 'bootstrap-colorpicker', '/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js');
         $this->enqueueStyle('vendor', 'bootstrap-colorpicker', '/vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.css');
+        
+        // Cropbox
+        $this->enqueueScript('vendor', 'cropbox', '/vendor/cropbox/jquery.cropbox.js', array('jquery'));
+        $this->enqueueStyle ('vendor', 'cropbox', '/vendor/cropbox/jquery.cropbox.css');
     }
 
     function includeCommonAssets() {
@@ -1297,6 +1301,10 @@ class Theme extends MapasCulturais\Theme {
             'insertVideoUrl'    => i::__('Insira uma url de um vídeo do YouTube ou do Vimeo.'),
             'insertLinkTitle'    => i::__('Insira um título para seu link.'),
             'insertLinkUrl'    => i::__('A url do link é inválida, insira uma url completa como http://www.google.com/.'),
+            'Limpar'    => i::__('Limpar'),
+            'Crop'    => i::__('Recortar'),
+            'CropHelp'    => i::__('Arraste para recortar'),
+            'removeAgentBackground' => i::__('Tem certeza que deseja remover a imagem de capa?'),
         ]);
     }
 
@@ -1494,7 +1502,7 @@ class Theme extends MapasCulturais\Theme {
             echo "\n</script>\n";
     }
 
-    function ajaxUploader($file_owner, $group_name, $response_action, $response_target, $response_template = '', $response_transform = '', $add_description_input = false, $file_types = '.jpg ou .png') {
+    function ajaxUploader($file_owner, $group_name, $response_action, $response_target, $response_template = '', $response_transform = '', $add_description_input = false, $humanCrop = false, $file_types = '.jpg ou .png') {
         $this->part('ajax-uploader', array(
             'file_owner' => $file_owner,
             'file_group' => $group_name,
@@ -1503,7 +1511,8 @@ class Theme extends MapasCulturais\Theme {
             'response_template' => $response_template,
             'response_transform' => $response_transform,
             'add_description' => $add_description_input,
-            'file_types' => $file_types
+            'file_types' => $file_types,
+            'human_crop' => $humanCrop
         ));
     }
 
@@ -1533,7 +1542,7 @@ class Theme extends MapasCulturais\Theme {
                 '@ORDER' => 'createTimestamp DESC'
             ));
         }
-        
+
         if ($this->controller->id === 'site' && $this->controller->action === 'search'){
             $skeleton_field = [
                 'fieldType' => 'checklist',
@@ -1571,7 +1580,9 @@ class Theme extends MapasCulturais\Theme {
                                 foreach ($data->config['options'] as $meta_key => $value)
                                     $mod_field['options'][] = ['value' => $sanitize_filter_value($meta_key), 'label' => $value];
                                 break;
+
                             case 'entitytype':
+
                                 $types = App::i()->getRegisteredEntityTypes("MapasCulturais\Entities\\".ucfirst($key));
                                 
                                 // ordena alfabeticamente
@@ -1585,6 +1596,12 @@ class Theme extends MapasCulturais\Theme {
                                 });
                                 foreach ($types as $type_key => $type_val)
                                     $mod_field['options'][] = ['value' => $sanitize_filter_value($type_key), 'label' => $type_val->name];
+
+                                $sort = [];
+                                foreach($mod_field['options'] as $k=>$v)
+                                    $sort['label'][$k] = $v['label'];
+                                array_multisort($sort['label'], SORT_ASC, $mod_field['options']);
+
                                 $this->addEntityTypesToJs("MapasCulturais\Entities\\".ucfirst($key));
                                 break;
                             case 'term':
@@ -1774,6 +1791,7 @@ class Theme extends MapasCulturais\Theme {
             'ownerUserId' => $entity->ownerUser->id,
             'definition' => $entity->getPropertiesMetadata(),
             'userHasControl' => $entity->canUser('@control'),
+            'canUserChangeOwner' => $entity->canUser('changeOwner'),
             'canUserCreateRelatedAgentsWithControl' => $entity->canUser('createAgentRelationWithControl'),
             'status' => $entity->status,
             'object' => $entity
@@ -1821,7 +1839,7 @@ class Theme extends MapasCulturais\Theme {
     }
 
     function addRelatedAdminAgentsToJs($entity) {
-        $this->jsObject['entity']['agentAdminRelations'] = $entity->getAgentRelations(true);
+        $this->jsObject['entity']['agentAdminRelations'] = $entity->getAgentRelations(true, true);
     }
 
     function addSubsiteAdminsToJs($subsite) {
@@ -1890,8 +1908,9 @@ class Theme extends MapasCulturais\Theme {
         $in = implode(',', array_map(function ($e){ return '@Project:' . $e; }, $ids));
 
         $this->jsObject['entity']['events'] = $app->controller('Event')->apiQuery([
-            '@select' => 'id,name,shortDescription,classificacaoEtaria,singleUrl,occurrences,terms,status,owner.id,owner.name,owner.singleUrl',
+            '@select' => 'id,name,shortDescription,classificacaoEtaria,singleUrl,occurrences.{id,space.{id,name,endereco,singleUrl},rule},terms,status,owner.id,owner.name,owner.singleUrl',
             'project' => 'IN(' . $in . ')',
+            'status' => 'GTE(0)', // include drafts
             '@permissions' => 'view',
             '@files' => '(avatar.avatarSmall):url'
         ]);
@@ -1932,7 +1951,7 @@ class Theme extends MapasCulturais\Theme {
         } else {
             $this->jsObject['entity']['registrations'] = $entity->sentRegistrations ? $entity->sentRegistrations : array();
         }
-        
+
         $this->jsObject['entity']['registrationRulesFile'] = $entity->getFile('rules');
         $this->jsObject['entity']['canUserModifyRegistrationFields'] = $entity->canUser('modifyRegistrationFields');
         $this->jsObject['projectRegistrationsEnabled'] = App::i()->config['app.enableProjectRegistration'];
@@ -1983,7 +2002,10 @@ class Theme extends MapasCulturais\Theme {
         $cache_id = __METHOD__ . ':' . $entity_class;
 
         if($app->cache->contains($cache_id)){
-            return $app->cache->fetch($cache_id);
+            $entity_id = $app->cache->fetch($cache_id);
+            if(!$entity_id)
+                return $entity_id;
+            return $app->repo($entity_class)->find($entity_id);
         }
 
         $controller = $app->getControllerByEntity($entity_class);
@@ -2016,7 +2038,7 @@ class Theme extends MapasCulturais\Theme {
             $result = null;
         }
 
-        $app->cache->save($cache_id, $result, 120);
+        $app->cache->save($cache_id, $result ? $result->id : $result, 120);
 
         return $result;
     }
@@ -2126,34 +2148,6 @@ class Theme extends MapasCulturais\Theme {
                 break;
 
         }
-    }
-
-
-    function registerMetadata($entity_class, $key, $cfg) {
-        $app = \MapasCulturais\App::i();
-        $def = new \MapasCulturais\Definitions\Metadata($key, $cfg);
-        return $app->registerMetadata($def, $entity_class);
-
-    }
-
-    function registerEventMetadata($key, $cfg) {
-        return $this->registerMetadata('MapasCulturais\Entities\Event', $key, $cfg);
-    }
-
-    function registerSpaceMetadata($key, $cfg) {
-        return $this->registerMetadata('MapasCulturais\Entities\Space', $key, $cfg);
-    }
-
-    function registerAgentMetadata($key, $cfg) {
-        return $this->registerMetadata('MapasCulturais\Entities\Agent', $key, $cfg);
-    }
-
-    function registerProjectMetadata($key, $cfg) {
-        return $this->registerMetadata('MapasCulturais\Entities\Project', $key, $cfg);
-    }
-
-    function registerSealMetadata($key, $cfg) {
-        return $this->registerMetadata('MapasCulturais\Entities\Seal', $key, $cfg);
     }
 
     /*

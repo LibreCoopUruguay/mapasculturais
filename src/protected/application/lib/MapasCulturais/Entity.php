@@ -275,10 +275,6 @@ abstract class Entity implements \JsonSerializable{
             $user = $userOrAgent->getOwnerUser();
         }
 
-        if($action != 'view' && $action != 'create' && $this->usesOriginSubsite() && !$this->authorizedInThisSite() && !$app->user->is('saasAdmin')){
-            return false;
-        }
-
         $result = false;
 
         if(strtolower($action) === '@control' && $this->usesAgentRelation()) {
@@ -295,6 +291,18 @@ abstract class Entity implements \JsonSerializable{
         $app->applyHookBoundTo($this, 'entity(' . $this->getHookClassPath() . ').canUser(' . $action . ')', ['user' => $user, 'result' => &$result]);
 
         return $result;
+    }
+    
+    /**
+     * Wether a user can access the private files owned by this entity
+     * 
+     * Default is to 'view', as it is used to protect the files attached to the registrations
+     * 
+     * Other entities can extend this method and change the verification
+     * 
+     */ 
+    public function canUserViewPrivateFiles($user) {
+        return $this->canUserView($user);
     }
 
     public function checkPermission($action){
@@ -545,8 +553,8 @@ abstract class Entity implements \JsonSerializable{
                 $this->checkPermission('create');
                 $is_new = true;
 
-                if($this->usesOriginSubsite()){
-                    $this->_subsiteId = $app->getCurrentSubsiteId();
+                if($this->usesOriginSubsite() && $app->getCurrentSubsiteId()){
+                    $this->setSubsite($app->getCurrentSubsite());
                 }
 
             }else{
@@ -621,15 +629,16 @@ abstract class Entity implements \JsonSerializable{
                 }  catch (\Exception $e) {}
             }
             $val = $nval;
-        }elseif(is_object($val) && !is_subclass_of($val, __CLASS__) && !in_array($val, $allowed_classes)){
+        }elseif(is_object($val) && !is_subclass_of($val, __CLASS__) && !in_array(\get_class($val), $allowed_classes)){
             throw new \Exception();
         }elseif(is_object($val)){
+
             if(in_array($val, Entity::$_jsonSerializeNestedObjects))
                 throw new \Exception();
-
         }
+
         return $val;
-    }
+    }   
 
     /**
      *
@@ -901,6 +910,10 @@ abstract class Entity implements \JsonSerializable{
         
         if($this->usesPermissionCache()){
             $this->deletePermissionsCache();
+        }
+
+        if($this->usesRevision()) {
+            //$this->_newDeletedRevision();
         }
     }
 

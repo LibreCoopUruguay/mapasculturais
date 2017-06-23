@@ -52,7 +52,7 @@
             apiQuery: { }
         };
         
-        if(!MapasCulturais.entity.userHasControl){
+        if(!MapasCulturais.entity.canUserChangeOwner){
             $scope.data.apiQuery['@permissions'] = '@control';
         }
         
@@ -75,8 +75,8 @@
             ChangeOwnerService.setOwnerTo(e.id).success(function(data, status){
                 if(status === 202){
                     var requestMessage = labels['requestMessage'];
-                    requestMessage.replace('{{type}}', MapasCulturais.entity.getTypeName());
-                    requestMessage.replace('{{recipient}}', '<strong>'+e.name+'</strong>');
+                    requestMessage = requestMessage.replace('{{type}}', MapasCulturais.entity.getTypeName());
+                    requestMessage = requestMessage.replace('{{recipient}}', '<strong>'+e.name+'</strong>');
                     MapasCulturais.Messages.alert(requestMessage);
                 }else{
                     $('.js-owner-name').html('<a href="' + e.singleUrl + '">' + e.name + '</a>');

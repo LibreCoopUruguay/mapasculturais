@@ -122,7 +122,7 @@ class Html extends \MapasCulturais\ApiOutput{
                         <?php elseif(strpos($k,'@files')===0):  continue; ?>
                         <?php elseif($k==='occurrences'): ?>
                             <td>
-                                <?php foreach($v as $occ): $occ->rule = json_decode($occ->rule);?>
+                                <?php foreach($v as $occ): $occ->rule = $occ->rule;?>
                                     <?php echo mb_convert_encoding($occ->rule->description,"HTML-ENTITIES","UTF-8");?>,
                                     <a href="<?php echo $occ->space->singleUrl?>"><?php echo mb_convert_encoding($occ->space->name,"HTML-ENTITIES","UTF-8");?></a>
                                     <?php if($occ->rule->price): ?>
@@ -238,6 +238,8 @@ class Html extends \MapasCulturais\ApiOutput{
                 <h1><?php
 
                 echo sprintf(App::txts("%s $singular_object_name encontrado.", "%s $plural_object_name encontrados.", count($data)), count($data)) ?></h1>
+                
+                <h4><?php echo \MapasCulturais\i::__('Planilha gerada em: ') . \date("d/m/Y H:i") ?></h4>
                 <?php $this->printTable($data) ?>
             </body>
         </html>
