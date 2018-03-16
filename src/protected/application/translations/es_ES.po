@@ -7046,7 +7046,7 @@ msgstr "Enviar inscripción"
 
 #: application/themes/BaseV1/layouts/parts/singles/registration-edit--send-button.php:14
 msgid "As inscrições encerraram-se em"
-msgstr "Las inscripciones se cerrarán en"
+msgstr "Las inscripciones se cerrarán el"
 
 #: application/themes/BaseV1/layouts/parts/singles/registration-edit--send-button.php:20
 msgid ""
