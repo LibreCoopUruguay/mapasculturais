@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-03-15 22:00-0300\n"
+"POT-Creation-Date: 2018-03-15 22:05-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -659,6 +659,7 @@ msgstr "Proyecto"
 #: application/themes/BaseV1/layouts/parts/home-projects.php:25
 #: application/themes/BaseV1/layouts/parts/home-search.php:24
 #: application/themes/BaseV1/layouts/parts/search/list-project.php:3
+#: application/themes/BaseV1/layouts/parts/singles/list-entities.php:4
 #: application/themes/BaseV1/layouts/parts/singles/subsite-entities.php:60
 #: application/themes/BaseV1/layouts/parts/singles/subsite-entities.php:61
 msgid "Projetos"
@@ -5810,6 +5811,18 @@ msgstr "Sellos Disponibles"
 #: application/themes/BaseV1/layouts/parts/related-seals.php:36
 msgid "Excluir selo"
 msgstr "Borrar sello"
+
+#: application/themes/BaseV1/layouts/parts/related-seals.php:40
+msgid "Não expira"
+msgstr "No vence"
+
+#: application/themes/BaseV1/layouts/parts/related-seals.php:41
+msgid "Expira em:"
+msgstr "Vence el:"
+
+#: application/themes/BaseV1/layouts/parts/related-seals.php:42
+msgid "Expirou em"
+msgstr "Venció el"
 
 #: application/themes/BaseV1/layouts/parts/related-seals.php:47
 #: application/themes/BaseV1/views/seal/sealrelation.php:68
