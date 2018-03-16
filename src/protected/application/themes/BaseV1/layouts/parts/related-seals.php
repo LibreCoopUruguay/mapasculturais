@@ -37,9 +37,9 @@ $this->addRelatedSealsToJs($entity);
                     <div class="descricao-do-selo">
                         <h1><a ng-href="<?php echo $app->createUrl('seal','sealrelation',[$idRelation]);?>" class="ng-binding">{{relation.seal.name}}</a></h1>
                         <p>
-                            <span ng-if="relation.toExpire === 2"><b>Não expira</b></span>
-                            <span ng-if="relation.toExpire === 1"><b>Expira em: {{relation.validateDate}}</b></span>
-                            <span ng-if="relation.toExpire === 0"><b>Expirou em: {{relation.validateDate}}</b></span>
+                            <span ng-if="relation.toExpire === 2"><b><?php \MapasCulturais\i::_e("Não expira");?></b></span>
+                            <span ng-if="relation.toExpire === 1"><b><?php \MapasCulturais\i::_e("Expira em:");?> {{relation.validateDate}}</b></span>
+                            <span ng-if="relation.toExpire === 0"><b><?php \MapasCulturais\i::_e("Expirou em");?>: {{relation.validateDate}}</b></span>
                         </p>
                         <p>
                             <div ng-if="relation.ownerSealUserId != <?php echo $app->user->id;?>" align="center">
