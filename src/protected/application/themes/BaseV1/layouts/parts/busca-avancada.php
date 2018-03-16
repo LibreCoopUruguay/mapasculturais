@@ -16,7 +16,7 @@
         ?>
     <?php endif; ?>
     <?php if($app->isEnabled('projects')): ?>
-        <?php $this->part('search/filter', ['display_name' => 'Projetos', 'entity_name' => 'project']); ?>
+        <?php $this->part('search/filter', ['display_name' => 'Proyectos', 'entity_name' => 'project']); ?>
     <?php endif; ?>
 
     <div id="search-results-header" class="clearfix">
