@@ -977,7 +977,7 @@ msgstr ""
 
 #: application/conf/project-types.php:83
 msgid "Edital"
-msgstr "Edital"
+msgstr "Convocatoria"
 
 #: application/conf/project-types.php:84
 msgid "Concurso"
@@ -3545,7 +3545,7 @@ msgstr ""
 
 #: application/themes/BaseV1/Theme.php:185
 msgid "resultados verifiados"
-msgstr "rResultados verificados"
+msgstr "Resultados verificados"
 
 #: application/themes/BaseV1/Theme.php:186
 msgid "texto do botão que aplica/remove o filtro por resultados verificados"
@@ -5348,7 +5348,7 @@ msgstr "Conozca más"
 
 #: application/themes/BaseV1/layouts/parts/home-spaces.php:34
 msgid " da "
-msgstr "proyectos de "
+msgstr " de "
 
 #: application/themes/BaseV1/layouts/parts/home-spaces.php:38
 msgid "Encontre "
