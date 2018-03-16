@@ -3412,7 +3412,7 @@ msgstr ""
 
 #: application/themes/BaseV1/Theme.php:141
 msgid "MC"
-msgstr "CeL"
+msgstr "Culturaenlinea"
 
 #: application/themes/BaseV1/Theme.php:145
 msgid "Url da página da instituição responsável pelo site"
@@ -5229,7 +5229,7 @@ msgstr "agentes registrados"
 
 #: application/themes/BaseV1/layouts/parts/home-agents.php:36
 msgid "agentes da "
-msgstr "agentes de la "
+msgstr "agentes de "
 
 #: application/themes/BaseV1/layouts/parts/home-agents.php:40
 msgid "Encontre agentes por"
@@ -5280,7 +5280,7 @@ msgstr "evento agendados"
 
 #: application/themes/BaseV1/layouts/parts/home-events.php:34
 msgid "eventos da "
-msgstr "eventos de la "
+msgstr "eventos de "
 
 #: application/themes/BaseV1/layouts/parts/home-events.php:38
 msgid "Encontre eventos por"
@@ -5302,7 +5302,7 @@ msgstr "proyectos registrados"
 
 #: application/themes/BaseV1/layouts/parts/home-projects.php:33
 msgid "projetos da "
-msgstr "proyectos de la "
+msgstr "proyectos de "
 
 #: application/themes/BaseV1/layouts/parts/home-projects.php:37
 msgid "Encontre projetos por"
@@ -5324,7 +5324,7 @@ msgstr "sellos registrados"
 
 #: application/themes/BaseV1/layouts/parts/home-seals.php:35
 msgid "selos da "
-msgstr "sellos de la "
+msgstr "sellos de "
 
 #: application/themes/BaseV1/layouts/parts/home-seals.php:52
 #: application/themes/BaseV1/layouts/parts/singles/project-registrations--seals.php:17
@@ -5348,7 +5348,7 @@ msgstr "Conozca más"
 
 #: application/themes/BaseV1/layouts/parts/home-spaces.php:34
 msgid " da "
-msgstr " de la "
+msgstr "proyectos de "
 
 #: application/themes/BaseV1/layouts/parts/home-spaces.php:38
 msgid "Encontre "
