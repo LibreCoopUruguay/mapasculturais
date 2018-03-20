@@ -50,7 +50,7 @@ function printSubsiteFilter($property){
 
     <?php $this->applyTemplateHook('subsite-filters-space','before'); ?>
     <section class="filter-section">
-        <header>Espaços</header>
+        <header><?php i::_e('Espaços'); ?></header>
         <?php $this->applyTemplateHook('subsite-filters-space','begin'); ?>
         <p>
           <span class="label <?php echo ($entity->isPropertyRequired($entity,"filtro_space_term_area") && $editEntity? 'required': '');?>"><?php i::_e('Área de Atuação do Espaço:'); ?> </span>
@@ -79,7 +79,7 @@ function printSubsiteFilter($property){
 
     <?php $this->applyTemplateHook('subsite-filters-event','before'); ?>
     <section class="filter-section">
-        <header>Eventos</header>
+        <header><?php i::_e('Eventos'); ?></header>
         <?php $this->applyTemplateHook('subsite-filters-event','begin'); ?>
         <p>
             <span class="label <?php echo ($entity->isPropertyRequired($entity,"filtro_event_term_linguagem") && $editEntity? 'required': '');?>"><?php i::_e('Linguagem:'); ?> </span>
@@ -90,7 +90,7 @@ function printSubsiteFilter($property){
     <?php $this->applyTemplateHook('subsite-filters-event','after'); ?>
     <?php $this->applyTemplateHook('subsite-filters-seal','before'); ?>
     <section class="filter-section">
-        <header>Selos Verificadores</header>
+        <header><?php i::_e('Selos Verificadores'); ?></header>
         <?php $this->applyTemplateHook('subsite-filters-seal','begin'); ?>
         <span class="label <?php echo ($entity->isPropertyRequired($entity, "verifiedSeals") && $editEntity ? 'required' : ''); ?>"><?php i::_e('Selos:'); ?> </span>
         <div class="subsite-related-seal-configuration" ng-controller="SealsSubSiteController">
@@ -110,12 +110,12 @@ function printSubsiteFilter($property){
                     <div class="selos clearfix">
                         <div ng-if="entity.verifiedSeals.length > 0" class="avatar-seal" ng-repeat="item in entity.verifiedSeals">
                             <img ng-if="item" class="img-seal" ng-src="{{avatarUrl(allowedSeals[getArrIndexBySealId(item)]['@files:avatar.avatarSmall'].url)}}">
-                            <div class="botoes"><a class="delete hltip js-remove-item"  data-href="" data-target="" data-confirm-message="" title="Excluir selo" ng-click="removeSeal(item)"></a></div>
+                            <div class="botoes"><a class="delete hltip js-remove-item"  data-href="" data-target="" data-confirm-message="" title="<?php i::esc_attr_e('Excluir selo'); ?>" ng-click="removeSeal(item)"></a></div>
                             <div ng-if="item" class="descricao-do-selo">
                                 <h1><a href="{{allowedSeals[getArrIndexBySealId(item)].singleUrl}}" class="ng-binding">{{allowedSeals[getArrIndexBySealId(item)].name}}</a></h1>
                             </div>
                         </div>
-                        <div ng-if="seals.length > 0" ng-click="editbox.open('set-seal-subsite', $event)" class="hltip editable editable-empty" title="Adicionar selo"></div>
+                        <div ng-if="seals.length > 0" ng-click="editbox.open('set-seal-subsite', $event)" class="hltip editable editable-empty" title="<?php i::esc_attr_e('Adicionar selo'); ?>"></div>
                     </div>
                 </div>
             </div>
