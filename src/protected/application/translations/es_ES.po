@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-03-20 00:30-0300\n"
+"POT-Creation-Date: 2018-03-21 01:21-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -7391,6 +7391,10 @@ msgstr ""
 msgid "exibir opções avançadas"
 msgstr "mostrar opciones avanzadas"
 
+#: /home/leonardo/mapas/mapasculturais/src/protected/application/themes/BaseV1/layouts/parts/singles/subsite-texts.php:35
+msgid "utilizando valor padrão (clique para definir)"
+msgstr "utilizando valor predeterminado (haga clic para definir)"
+
 #: /home/leonardo/mapas/mapasculturais/src/protected/application/themes/BaseV1/layouts/parts/singles/registration-edit--agents.php:3
 msgid "Relacione os agentes responsáveis pela inscrição."
 msgstr "Relaciones los agentes responsables por la inscripción."
@@ -8890,9 +8894,6 @@ msgid "O Mapas Culturais é uma plataforma livre para mapeamento cultural."
 msgstr ""
 "Cultura en Línea es una plataforma de software libre, de cartografía "
 "cultural libre y colaborativa."
-
-#~ msgid "utilizando valor padrão (clique para definir)"
-#~ msgstr "utilizando valor predeterminado (haga clic para definir)"
 
 #~ msgid "Fake Authentication"
 #~ msgstr "Autenticación falsa"
