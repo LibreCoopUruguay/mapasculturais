@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-03-21 01:21-0300\n"
+"POT-Creation-Date: 2018-03-21 23:44-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2161,7 +2161,7 @@ msgstr "Enviar inscripción"
 #: /home/leonardo/mapas/mapasculturais/src/protected/application/themes/culturaenlinea/layouts/parts/singles/registration-edit--send-button.php:14
 #: /home/leonardo/mapas/mapasculturais/src/protected/application/themes/BaseV1/layouts/parts/singles/registration-edit--send-button.php:14
 msgid "As inscrições encerraram-se em"
-msgstr "Las inscripciones se cerrarán el"
+msgstr "Las inscripciones se cerraron el"
 
 #: /home/leonardo/mapas/mapasculturais/src/protected/application/themes/culturaenlinea/layouts/parts/singles/registration-edit--send-button.php:20
 #: /home/leonardo/mapas/mapasculturais/src/protected/application/themes/BaseV1/layouts/parts/singles/registration-edit--send-button.php:20
